@@ -9,6 +9,7 @@
     }],
     "minimum-stability": "stable",
     "require": {
+		"costamateus/laravel-mautic-api" : "dev-master",
         "php": "^7.3|^8.0",
         "laravel/framework": "^8.12",
         "mautic/api-library": "^2.12.0",
