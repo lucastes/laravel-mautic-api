@@ -1,8 +1,8 @@
 {
-    "name": "princealikhan/laravel-mautic-api",
+    "name": "costamateus/laravel-mautic-api",
     "description": "Free and Open Source Marketing Automation API",
     "license": "MIT",
-    "keywords": ["mautic","laravel","lumen","princealikhan","api","sync","automation","email","marketing"],
+    "keywords": ["mautic","laravel","lumen","api","sync","automation","email","marketing"],
     "authors": [
         {
             "name": "Prince Ali Khan",
@@ -22,5 +22,5 @@
         "psr-4": {
             "Princealikhan\\Mautic\\": "src/"
         }
-    }    
+    }
 }
