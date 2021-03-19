@@ -1,34 +1,28 @@
-<?php namespace Princealikhan\Mautic\Http\Controllers;
+<?php
+
+namespace Triibo\Mautic\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Princealikhan\Mautic\Models\MauticConsumer;
-use Princealikhan\Mautic\Facades\Mautic;
+use Triibo\Mautic\Models\MauticConsumer;
+use Triibo\Mautic\Facades\Mautic;
 
-
+class MauticController extends Controller
+{
 
     /**
-     * Created by PhpStorm.
-     * User: prince
-     * Date: 26/11/16
-     * Time: 4:12 PM
+     * Setup Applicaion.
      */
-    class MauticController extends Controller
+    public function initiateApplication()
     {
+        $consumer = MauticConsumer::count();
 
-        /**
-         * Setup Applicaion.
-         */
-        public function initiateApplication()
+        if ($consumer == 0)
         {
-
-            $consumer = MauticConsumer::count();
-
-            if($consumer == 0){
-                Mautic::connection('main');
-            }else{
-                echo '<h1>Mautic App Already Register</h1>';
-            }
-
+            Mautic::connection('main');
         }
-
+        else
+        {
+            echo '<h1>Mautic App Already Register</h1>';
+        }
     }
+}

@@ -1,10 +1,12 @@
-<?php namespace Princealikhan\Mautic;
+<?php
 
-use Princealikhan\Mautic\Factories\MauticFactory;
+namespace Triibo\Mautic;
+
+use Triibo\Mautic\Factories\MauticFactory;
 use GrahamCampbell\Manager\AbstractManager;
 use Illuminate\Contracts\Config\Repository;
 use Mautic\Auth\OAuthClient;
-use Princealikhan\Mautic\Models\MauticConsumer;
+use Triibo\Mautic\Models\MauticConsumer;
 
 class Mautic extends AbstractManager
 {
@@ -60,7 +62,7 @@ class Mautic extends AbstractManager
      */
     public function getFactory()
     {
-        return $this->factory;  
+        return $this->factory;
     }
 
     /**
@@ -69,20 +71,20 @@ class Mautic extends AbstractManager
      * @param null $body
      * @return mixed
      */
-    public function request($method=null, $endpoints=null, $body=null)
+    public function request($method = null, $endpoints = null, $body = null)
     {
-
-        $consumer = MauticConsumer::whereNotNull('id')
-            ->orderBy('created_at', 'desc')
-            ->first();
+        $consumer         = MauticConsumer::whereNotNull('id')->orderBy('created_at', 'desc')->first();
 
         $expirationStatus = $this->factory->checkExpirationTime($consumer->expires);
 
-        if($expirationStatus==true){
-            $newToken   =  $this->factory->refreshToken($consumer->refresh_token);
-            return $this->factory->callMautic($method,$endpoints,$body,$newToken->access_token);
-        } else{
-            return $this->factory->callMautic($method,$endpoints,$body,$consumer->access_token);
+        if ($expirationStatus == true)
+        {
+            $newToken = $this->factory->refreshToken($consumer->refresh_token);
+            return $this->factory->callMautic($method, $endpoints, $body, $newToken->access_token);
+        }
+        else
+        {
+            return $this->factory->callMautic($method, $endpoints, $body, $consumer->access_token);
         }
     }
 
