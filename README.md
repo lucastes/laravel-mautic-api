@@ -1,4 +1,4 @@
-## Mautic API in Laravel.
+## Mautic API in Laravel 8.
 Free and Open Source Marketing Automation API
 
 ## Requirements
@@ -25,14 +25,14 @@ Then, update `config/app.php` by adding an entry for the service provider.
 ```php
 'providers' => [
 	// ...
-	'Triibo\Mautic\MauticServiceProvider',
+	Triibo\Mautic\MauticServiceProvider::class,
 ],
 ```
 Then, register class alias by adding an entry in aliases section
 ```php
 'aliases' => [
     //.....
-    'Mautic' => 'Triibo\Mautic\Facades\Mautic',
+    'Mautic' => Triibo\Mautic\Facades\Mautic::class,
 ],
 ```
 Finally, from the command line run `php artisan vendor:publish` to publish the default configuration file.
@@ -41,7 +41,14 @@ This will publish a configuration file name `mautic.php` ,`consumer migration` a
 Run `php artisan migrate` migration command to create consumer table in your database.
 
 ## Configuration
-You need to add your `client id`, `client secret` and  `callback url`  in `mautic.php` file that is found in your applications `config` directory.
+You need to add your `client id`, `client secret` and  `callback url`  in `config/mautic.php`.
+Or put it in your `.env` file.
+```
+MAUTIC_BASE_URL="https://your-mautic.com"
+MAUTIC_PUBLIC_KEY="publicKey"
+MAUTIC_SECRET_KEY="secretKey"
+MAUTIC_CALLBACK="https://your-callback.com"
+```
 
 ## Authorization
 This Library only support OAuth2 Authorization

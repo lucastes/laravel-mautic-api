@@ -2,7 +2,7 @@
     "name": "costamateus/laravel-mautic-api",
     "description": "Free and Open Source Marketing Automation API",
     "license": "MIT",
-    "keywords": ["mautic", "laravel", "lumen", "api", "sync", "automation", "email", "marketing"],
+    "keywords": ["mautic", "laravel", "laravel 8", "api", "sync", "automation", "email", "marketing"],
     "authors": [{
         "name": "Prince Ali Khan",
         "email": "princealikhan08@gmail.com"
