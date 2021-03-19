@@ -2,7 +2,7 @@
 Free and Open Source Marketing Automation API
 
 ## Requirements
-* Laravel ^8.*
+* Laravel ^8.0
 * PHP ^7.3 or newer
 * cURL support
 
