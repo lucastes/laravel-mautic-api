@@ -90,8 +90,11 @@ class MauticFactory
         session_start();
 
         // Initiate the auth object
-        $auth = ApiAuth::initiate($setting);
-        // Initiate process for obtaining an access token; this will redirect the user to the authorize endpoint and/or set the tokens when the user is redirected back after granting authorization
+        $initAuth = new ApiAuth();
+        $auth     = $initAuth->newAuth($setting);
+
+        // Initiate process for obtaining an access token; this will redirect the user to the $authorizationUrl and/or
+        // set the access_tokens when the user is redirected back after granting authorization
 
         if ($auth->validateAccessToken())
         {
