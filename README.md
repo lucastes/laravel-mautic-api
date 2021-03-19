@@ -1,8 +1,9 @@
-## Mautic API in Laravel/Lumen.
+## Mautic API in Laravel.
 Free and Open Source Marketing Automation API
 
 ## Requirements
-* PHP 5.5.* or newer
+* Laravel ^8.*
+* PHP ^7.3 or newer
 * cURL support
 
 ## Mautic Setup
