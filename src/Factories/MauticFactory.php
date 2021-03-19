@@ -2,10 +2,11 @@
 
 namespace Triibo\Mautic\Factories;
 
+use GuzzleHttp\Client;
 use Mautic\Auth\ApiAuth;
+use Illuminate\Support\Arr;
 use Mautic\Auth\OAuthClient;
 use Triibo\Mautic\Models\MauticConsumer;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
 class MauticFactory
@@ -73,7 +74,7 @@ class MauticFactory
             }
         }
 
-        return array_only($config, ['version', 'baseUrl', 'clientKey', 'clientSecret', 'callback']);
+        return Arr::only($config, ['version', 'baseUrl', 'clientKey', 'clientSecret', 'callback']);
     }
 
     /**
