@@ -2,11 +2,11 @@
 
 namespace Triibo\Mautic;
 
+use Mautic\Auth\OAuthClient;
+use Triibo\Mautic\Models\MauticConsumer;
 use Triibo\Mautic\Factories\MauticFactory;
 use GrahamCampbell\Manager\AbstractManager;
 use Illuminate\Contracts\Config\Repository;
-use Mautic\Auth\OAuthClient;
-use Triibo\Mautic\Models\MauticConsumer;
 
 class Mautic extends AbstractManager
 {

@@ -2,9 +2,9 @@
 
 namespace Triibo\Mautic\Http\Controllers;
 
+use Triibo\Mautic\Facades\Mautic;
 use App\Http\Controllers\Controller;
 use Triibo\Mautic\Models\MauticConsumer;
-use Triibo\Mautic\Facades\Mautic;
 
 class MauticController extends Controller
 {
@@ -19,6 +19,7 @@ class MauticController extends Controller
         if ($consumer == 0)
         {
             Mautic::connection('main');
+            echo '<h1>Mautic App Successfully Registered</h1>';
         }
         else
         {
