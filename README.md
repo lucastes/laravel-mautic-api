@@ -1,4 +1,4 @@
-## Mautic API in Laravel 8.
+# Mautic API in Laravel 8.
 Free and Open Source Marketing Automation API
 
 ## Requirements
@@ -7,13 +7,13 @@ Free and Open Source Marketing Automation API
 * cURL support
 
 ## Mautic Setup
-The API must be enabled in Mautic. Within Mautic, go to the Configuration page (located in the Settings menu) and under API Settings enable
-Mautic's API.  You can also choose which OAuth2 protocol to use here.  After saving the configuration, go to the API Credentials page
-(located in the Settings menu) and create a new client.  Enter the callback/redirect URI that the request will be sent from.  Click Apply
-then copy the Client ID and Client Secret to the application that will be using the API.
+The API must be enabled in Mautic.
+
+Within Mautic, go to the Configuration page (located in the Settings menu) and under API Settings enable Mautic's API. You can also choose which OAuth2 protocol to use here.
+
+After saving the configuration, go to the API Credentials page (located in the Settings menu) and create a new client. Enter the `callback/redirect` URI ( must be `https://your-app.com/mautic/application/register`) that the request will be sent from. Click Apply then copy the `Client ID` and `Client Secret` to the application that will be using the API.
 
 ## Installation
-
 First, you'll need to require the package with Composer:
 ```sh
 composer require costamateus/laravel-mautic-api
@@ -47,12 +47,12 @@ Or put it in your `.env` file.
 MAUTIC_BASE_URL="https://your-mautic.com"
 MAUTIC_PUBLIC_KEY="publicKey"
 MAUTIC_SECRET_KEY="secretKey"
-MAUTIC_CALLBACK="https://your-callback.com"
+MAUTIC_CALLBACK="https://your-app.com/mautic/application/register"
 ```
 
 ## Authorization
-This Library only support OAuth2 Authorization
-you must need to create a OAuth2 client in order to use api.
+This Library only support `OAuth2` Authorization
+you must need to create a `OAuth2` client in order to use api.
 
 ## Registering Application
 In order to register you application with mautic ping this url this is one time registration.
@@ -64,7 +64,7 @@ http://your-app/mautic/application/register
 # Usage
 Add Mautic Facade in your controller.
 ```php
-use Mautic;
+use Triibo\Mautic\Facades\Mautic;
 ```
 #### Send a request to mautic ( Example )
 Create a new contact in mautic.
