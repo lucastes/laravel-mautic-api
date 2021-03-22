@@ -94,27 +94,14 @@ Mautic::request('Delete','contacts/1/delete');
 ##### And many more endpoints support by mautic.
 ### List of Endpoints supported by Mautic.
 
-#### Contacts
-```json
-[
-    "contacts",
-    "contacts/{id}",
-    "contacts/list/fields",
-    "contacts/list/owners",
-    "contacts/new",
-    "contacts/{id}/edit",
-    "contacts/{id}/delete",
-    "contacts/{id}/notes",
-    "contacts/{id}/segments",
-    "contacts/{id}/campaigns"
-]
-```
-
 #### Assets
 ```json
 [
     "assets",
-    "assets/{id}"
+    "assets/new",
+    "assets/{asset_id}",
+    "assets/{asset_id}/edit",
+    "assets/{asset_id}/delete"
 ]
 ```
 
@@ -122,9 +109,68 @@ Mautic::request('Delete','contacts/1/delete');
 ```json
 [
     "campaigns",
-    "campaigns/{id}",
-    "campaigns/contact/{id}/add/{leadId}",
-    "campaigns/contact/{id}/remove/{leadId}"
+    "campaigns/new",
+    "campaigns/{campaign_id}",
+    "campaigns/{campaign_id}/contacts",
+    "campaigns/clone/{campaign_id}",
+    "campaigns/{campaign_id}/edit",
+    "campaigns/{campaign_id}/delete",
+    "campaigns/{campaign_id}/contact/{contact_id}/add",
+    "campaigns/{campaign_id}/contact/{contact_id}/remove"
+]
+```
+
+#### Categories
+```json
+[
+    "categories",
+    "categories/new",
+    "categories/{category_id}",
+    "categories/{category_id}/edit",
+    "categories/{category_id}/delete"
+]
+```
+
+#### Companies
+```json
+[
+    "companies",
+    "companies/new",
+    "companies/{company_id}",
+    "companies/{company_id}/edit",
+    "companies/{company_id}/delete",
+    "companies/{company_id}/contact/{contact_id}/add",
+    "companies/{company_id}/contact/{contact_id}/remove"
+]
+```
+
+#### Contacts
+```json
+[
+    "contacts",
+    "contacts/batch/new",
+    "contacts/batch/edit",
+    "contacts/batch/delete",
+    "contacts/new",
+    "contacts/{contact_id}",
+    "contacts/{contact_id}/edit",
+    "contacts/{contact_id}/delete",
+    "contacts/{contact_id}/dnc/{channel}/add",
+    "contacts/{contact_id}/dnc/{channel}/remove",
+    "contacts/{contact_id}/utm/add",
+    "contacts/{contact_id}/utm/{utm_id}/remove",
+    "contacts/{contact_id}/points/plus/{points}",
+    "contacts/{contact_id}/points/minus/{points}",
+    "contacts/list/owners",
+    "contacts/list/fields",
+    "contacts/{contact_id}/notes",
+    "contacts/{contact_id}/segments",
+    "contacts/{contact_id}/campaigns"
+    "contacts/{contact_id}/events",
+    "contacts/{contact_id}/activity",
+    "contacts/activity",
+    "contacts/{contact_id}/companies",
+    "contacts/{contact_id}/devices"
 ]
 ```
 
@@ -133,15 +179,58 @@ Mautic::request('Delete','contacts/1/delete');
 [
     "data",
     "data/{type}",
+    "data/emails.in.time",
+    "data/sent.email.to.contacts",
+    "data/most.hit.email.redirects"
 ]
 ```
+
+#### Dynamic Content
+```json
+[
+    "dynamiccontents",
+    "dynamiccontents/new",
+    "dynamiccontents/{dynamiccontent_id}",
+    "dynamiccontents/{dynamiccontent_id}/edit",
+    "dynamiccontents/{dynamiccontent_id}/delete"
+]
+```
+
 #### Emails
 ```json
 [
     "emails",
-    "emails/{id}",
-    "emails/{id}/send",
-    "emails/{id}/send/lead/{leadId}"
+    "emails/new",
+    "emails/{email_id}",
+    "emails/{email_id}/edit",
+    "emails/{email_id}/delete",
+    "emails/{email_id}/send",
+    "emails/reply/{tracking_hash}"
+]
+```
+
+#### Fields
+```json
+[
+    "fields/company",
+    "fields/company/new",
+    "fields/company/{company_id}",
+    "fields/company/{company_id}/edit",
+    "fields/company/{company_id}/delete",
+    "fields/contact",
+    "fields/contact/new",
+    "fields/contact/{contact_id}",
+    "fields/contact/{contact_id}/edit",
+    "fields/contact/{contact_id}/delete"
+]
+```
+
+#### Files
+```json
+[
+    "files/images",
+    "files/{dir}/new",
+    "files/{dir}/{file}/delete"
 ]
 ```
 
@@ -149,50 +238,200 @@ Mautic::request('Delete','contacts/1/delete');
 ```json
 [
     "forms",
-    "forms/{id}"
+    "forms/new",
+    "forms/{form_id}",
+    "forms/{form_id}/edit",
+    "forms/{form_id}/delete",
+    "forms/{form_id}/fields/delete",
+    "forms/{form_id}/actions/delete",
+    "forms/{form_id}/submissions",
+    "forms/{form_id}/submissions/contact/{contact_id}",
+    "forms/{form_id}/submissions/{submission_id}"
 ]
 ```
+
+#### Marketing Messages
+```json
+[
+    "messages",
+    "messages/new",
+    "messages/{message_id}",
+    "messages/{message_id}/edit",
+    "messages/{message_id}/delete"
+]
+```
+
+#### Notes
+```json
+[
+    "notes",
+    "notes/new",
+    "notes/{note_id}",
+    "notes/{note_id}/edit",
+    "notes/{note_id}/delete"
+]
+```
+
+#### Notifications
+```json
+[
+    "notifications",
+    "notifications/new",
+    "notifications/{notification_id}",
+    "notifications/{notification_id}/edit",
+    "notifications/{notification_id}/delete"
+]
+```
+
 #### Pages
 ```json
 [
     "pages",
-    "pages/{id}"
+    "pages/new",
+    "pages/{page_id}",
+    "pages/{page_id}/edit",
+    "pages/{page_id}/delete"
 ]
 ```
-#### Points
+
+#### Points Actions
 ```json
 [
     "points",
-    "points/{id}",
+    "points/new",
+    "points/{point_id}",
+    "points/{point_id}/edit",
+    "points/{point_id}/delete",
+    "points/actions/types",
     "points/triggers",
-    "points/triggers/{id}"
+    "points/triggers/new",
+    "points/triggers/{point_id}",
+    "points/triggers/{point_id}/edit",
+    "points/triggers/{point_id}/delete",
+    "points/triggers/{point_id}/events/delete",
+    "points/triggers/events/types"
 ]
 ```
+
 #### Reports
 ```json
 [
     "reports",
-    "reports/{id}"
+    "reports/{report_id}"
 ]
 ```
+
+#### Roles
+```json
+[
+    "roles",
+    "roles/new",
+    "roles/{role_id}",
+    "roles/{role_id}/edit",
+    "roles/{role_id}/delete"
+]
+```
+
 #### Segments
 ```json
 [
     "segments",
-    "segments/contact/{id}/add/{leadId}",
-    "segments/contact/{id}/remove/{leadId}"
+    "segments/new",
+    "segments/{segment_id}",
+    "segments/{segment_id}/edit",
+    "segments/{segment_id}/delete",
+    "segments/{segment_id}/contact/{contact_id}/add",
+    "segments/{segment_id}/contact/{contact_id}/remove"
 ]
 ```
+
+#### Text messages
+```json
+[
+    "smses",
+    "smses/new",
+    "smses/{sms_id}",
+    "smses/{sms_id}/edit",
+    "smses/{sms_id}/delete",
+    "smses/{sms_id}/contact/{contact_id}/send"
+]
+```
+
+#### Stages
+```json
+[
+    "stages",
+    "stages/new",
+    "stages/{stage_id}",
+    "stages/{stage_id}/edit",
+    "stages/{stage_id}/delete",
+    "stages/{stage_id}/contact/{contact_id}/add",
+    "stages/{stage_id}/contact/{contact_id}/remove"
+]
+```
+
+#### Stats
+```json
+[
+    "stats",
+    "stats/{table}"
+]
+```
+
+#### Tags
+```json
+[
+    "tags",
+    "tags/new",
+    "tags/{tag_id}",
+    "tags/{tag_id}/edit",
+    "tags/{tag_id}/delete"
+]
+```
+
+#### Themes
+```json
+[
+    "themes",
+    "themes/new",
+    "themes/{theme_name}",
+    "themes/{theme_name}/delete"
+]
+```
+
+#### Tweets
+```json
+[
+    "tweets",
+    "tweets/new",
+    "tweets/{tweet_id}",
+    "tweets/{tweet_id}/edit",
+    "tweets/{tweet_id}/delete"
+]
+```
+
 #### Users
 ```json
 [
-    "roles",
-    "roles/{id}",
     "users",
-    "users/{id}",
-    "users/list/roles",
+    "users/new",
+    "users/{user_id}",
+    "users/{user_id}/edit",
+    "users/{user_id}/delete",
     "users/self",
-    "users/{id}/permissioncheck",
+    "users/{user_id}/permissioncheck"
+]
+```
+
+#### Webhooks
+```json
+[
+    "hooks",
+    "hooks/new",
+    "hooks/{hook_id}",
+    "hooks/{hook_id}/edit",
+    "hooks/{hook_id}/delete",
+    "hooks/triggers"
 ]
 ```
 
