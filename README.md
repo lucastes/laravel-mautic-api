@@ -35,10 +35,10 @@ Then, register class alias by adding an entry in aliases section
     'Mautic' => Triibo\Mautic\Facades\Mautic::class,
 ],
 ```
-Finally, from the command line run `php artisan vendor:publish` to publish the default configuration file.
+Finally, from the command line run `php artisan vendor:publish --provider="Triibo\Mautic\MauticServiceProvider"` to publish the default configuration file.
 This will publish a configuration file name `mautic.php` ,`consumer migration` and `consumer model`.
 
-Run `php artisan migrate` migration command to create consumer table in your database.
+Then, run `php artisan migrate` migration command to create consumer table in your database.
 
 ## Configuration
 You need to add your `client id`, `client secret` and  `callback url`  in `config/mautic.php`.
@@ -57,7 +57,7 @@ you must need to create a `OAuth2` client in order to use api.
 ## Registering Application
 In order to register you application with mautic ping this url this is one time registration.
 ```url
-http://your-app/mautic/application/register
+http://your-app.com/mautic/application/register
 ```
 
 
