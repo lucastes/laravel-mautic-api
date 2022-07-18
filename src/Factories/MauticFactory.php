@@ -12,6 +12,13 @@ use GuzzleHttp\Exception\ClientException;
 class MauticFactory
 {
 
+    public function getDefaultConnection()
+    {
+        $connectionName = config('mautic.default');
+
+        return config('mautic.connections.' . $connectionName);
+    }
+
     /**
      * Make a new Mautic url.
      *
@@ -20,10 +27,12 @@ class MauticFactory
      */
     protected function getMauticUrl($endpoints = null)
     {
+        $conn = $this->getDefaultConnection();
+
         if (!empty($endpoints))
-            return config('mautic.connections.main.baseUrl') . '/' . $endpoints;
+            return $conn['baseUrl'] . '/' . $endpoints;
         else
-            return config('mautic.connections.main.baseUrl') . '/';
+            return $conn['baseUrl'] . '/';
     }
 
     /**
@@ -67,12 +76,8 @@ class MauticFactory
         $keys = ['clientKey', 'clientSecret'];
 
         foreach ($keys as $key)
-        {
             if (!array_key_exists($key, $config))
-            {
                 throw new \InvalidArgumentException('The Mautic client requires configuration.');
-            }
-        }
 
         return Arr::only($config, ['version', 'baseUrl', 'clientKey', 'clientSecret', 'callback']);
     }
@@ -121,6 +126,7 @@ class MauticFactory
     public function callMautic($method, $endpoints, $body, $token)
     {
         $mauticURL = $this->getMauticUrl('api/' . $endpoints);
+        $conn      = $this->getDefaultConnection();
 
         $params    = array();
 
@@ -129,13 +135,29 @@ class MauticFactory
             $params = array();
 
             foreach ($body as $key => $item)
-            {
                 $params['form_params'][$key] = $item;
-            }
         }
 
-        $headers = array('headers' => ['Authorization' => 'Bearer ' . $token]);
-        $client  = new Client($headers);
+
+        if ($conn['version'] == 'BasicAuth')
+        {
+            $headers = [
+                'auth' => [
+                    $conn['username'],
+                    $conn['password'],
+                ]
+            ];
+        }
+        else
+        {
+            $headers = [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token
+                ]
+            ];
+        }
+
+        $client = new Client($headers);
 
         try
         {

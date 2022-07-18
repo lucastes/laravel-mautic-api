@@ -31,28 +31,33 @@ Then, update `config/app.php` by adding an entry for the service provider.
 Then, register class alias by adding an entry in aliases section
 ```php
 'aliases' => [
-    //.....
+    // ...
     'Mautic' => Triibo\Mautic\Facades\Mautic::class,
 ],
 ```
 Finally, from the command line run `php artisan vendor:publish --provider="Triibo\Mautic\MauticServiceProvider"` to publish the default configuration file.
-This will publish a configuration file name `mautic.php` ,`consumer migration` and `consumer model`.
+This will publish a configuration file name `mautic.php`, `consumer migration` and `consumer model`.
 
 Then, run `php artisan migrate` migration command to create consumer table in your database.
 
 ## Configuration
-You need to add your `client id`, `client secret` and  `callback url`  in `config/mautic.php`.
+You need to add your `client id`, `client secret` and  `callback url` for OAuth2 or `username` and `password` for BasicAuth in `config/mautic.php`.
 Or put it in your `.env` file.
 ```
+## OAuth2
 MAUTIC_BASE_URL="https://your-mautic.com"
 MAUTIC_PUBLIC_KEY="publicKey"
 MAUTIC_SECRET_KEY="secretKey"
 MAUTIC_CALLBACK="https://your-app.com/mautic/application/register"
+## or BasicAuth
+MAUTIC_BASE_URL="https://your-mautic.com"
+MAUTIC_USERNAME="username"
+MAUTIC_PASSWORD="password"
 ```
 
 ## Authorization
-This Library only support `OAuth2` Authorization
-you must need to create a `OAuth2` client in order to use api.
+This Library only supports `OAuth2` and `BasicAuth` Authentication.
+For OAuth2 you need to create a `OAuth2` client in order to use the api.
 
 ## Registering Application
 In order to register you application with mautic ping this url this is one time registration.
@@ -71,8 +76,8 @@ Create a new contact in mautic.
 ```php
 $params = array(
     'firstname' => 'Prince',
-    'lastname'=> 'Ali Khan',
-    'email' => 'princealikhan08@gmail.com'
+    'lastname'  => 'Ali Khan',
+    'email'     => 'princealikhan08@gmail.com'
 );
 
 Mautic::request('POST','contacts/new',$params);

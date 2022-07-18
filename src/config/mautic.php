@@ -26,7 +26,7 @@ return [
     |--------------------------------------------------------------------------
     | Auth Type
     |--------------------------------------------------------------------------
-    | Version of the OAuth can be OAuth2 or OAuth1a. OAuth2 is the default value.
+    | Version of the auth can be OAuth2 or BasicAuth. OAuth2 is the default value.
     |
     */
     'version'     => env('MAUTIC_AUTH_VERSION', 'OAuth2'),
@@ -42,12 +42,18 @@ return [
     |
     */
     'connections' => [
-        'main' => [
+        'main'  => [
             'version'      => 'OAuth2',
             'baseUrl'      => env('MAUTIC_BASE_URL'),
             'clientKey'    => env('MAUTIC_PUBLIC_KEY'),
             'clientSecret' => env('MAUTIC_SECRET_KEY'),
             'callback'     => env('MAUTIC_CALLBACK'),
+        ],
+        'basic' => [
+            'version'      => 'BasicAuth',
+            'baseUrl'      => env('MAUTIC_BASE_URL'),
+            'username'     => env('MAUTIC_USERNAME'),
+            'password'     => env('MAUTIC_PASSWORD'),
         ]
     ],
 
