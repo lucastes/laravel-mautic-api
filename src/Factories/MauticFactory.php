@@ -123,36 +123,31 @@ class MauticFactory
         $mauticURL = $this->getMauticUrl( "api/$endpoints" );
         $conn      = $this->getDefaultConnection();
 
-        $params    = array();
+        $params    = [];
 
         if ( !empty( $body ) )
-        {
-            $params = array();
-
             foreach ( $body as $key => $item )
                 $params[ "form_params" ][ $key ] = $item;
-        }
-
 
         if ( $conn[ "version" ] == "BasicAuth" )
         {
-            $headers = [
-                "auth" => [
-                    $conn[ "username" ],
-                    $conn[ "password" ],
-                ]
-            ];
+            $user = $conn[ "username" ];
+            $pass = $conn[ "password" ];
+            $b64  = base64_encode( "$user:$pass" );
+            $auth = "Basic $b64";
         }
         else
         {
-            $headers = [
-                "headers" => [
-                    "Authorization" => "Bearer " . $token
-                ]
-            ];
+            $auth = "Bearer $token";
         }
 
-        $client = new Client( $headers );
+        $headers = [
+            "headers" => [
+                "Authorization" => $auth,
+            ]
+        ];
+
+        $client  = new Client( $headers );
 
         try
         {
