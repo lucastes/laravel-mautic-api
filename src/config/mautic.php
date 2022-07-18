@@ -1,13 +1,5 @@
 <?php
 
-/*
- * This file is part of Laravel mautic.
- * Prince Ali Khan <princealikhan08@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 return [
 
     /*
@@ -20,7 +12,7 @@ return [
     | connections at once using the manager class.
     |
     */
-    'default'     => 'main',
+    "default"     => "main",
 
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +21,7 @@ return [
     | Version of the auth can be OAuth2 or BasicAuth. OAuth2 is the default value.
     |
     */
-    'version'     => env('MAUTIC_AUTH_VERSION', 'OAuth2'),
+    "version"     => env( "MAUTIC_AUTH_VERSION", "OAuth2" ),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,19 +33,19 @@ return [
     | you would like.
     |
     */
-    'connections' => [
-        'main'  => [
-            'version'      => 'OAuth2',
-            'baseUrl'      => env('MAUTIC_BASE_URL'),
-            'clientKey'    => env('MAUTIC_PUBLIC_KEY'),
-            'clientSecret' => env('MAUTIC_SECRET_KEY'),
-            'callback'     => env('MAUTIC_CALLBACK'),
+    "connections" => [
+        "main"  => [
+            "version"      => "OAuth2",
+            "baseUrl"      => env( "MAUTIC_BASE_URL"   ),
+            "clientKey"    => env( "MAUTIC_PUBLIC_KEY" ),
+            "clientSecret" => env( "MAUTIC_SECRET_KEY" ),
+            "callback"     => env( "MAUTIC_CALLBACK"   ),
         ],
-        'basic' => [
-            'version'      => 'BasicAuth',
-            'baseUrl'      => env('MAUTIC_BASE_URL'),
-            'username'     => env('MAUTIC_USERNAME'),
-            'password'     => env('MAUTIC_PASSWORD'),
+        "basic" => [
+            "version"      => "BasicAuth",
+            "baseUrl"      => env( "MAUTIC_BASE_URL"   ),
+            "username"     => env( "MAUTIC_USERNAME"   ),
+            "password"     => env( "MAUTIC_PASSWORD"   ),
         ]
     ],
 

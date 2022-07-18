@@ -26,9 +26,9 @@ class Mautic extends AbstractManager
      *
      * @return void
      */
-    public function __construct(Repository $config, MauticFactory $factory)
+    public function __construct( Repository $config, MauticFactory $factory )
     {
-        parent::__construct($config);
+        parent::__construct( $config );
 
         $this->factory = $factory;
     }
@@ -40,9 +40,9 @@ class Mautic extends AbstractManager
      *
      * @return mixed
      */
-    protected function createConnection(array $config)
+    protected function createConnection( array $config )
     {
-        return $this->factory->make($config);
+        return $this->factory->make( $config );
     }
 
     /**
@@ -52,7 +52,7 @@ class Mautic extends AbstractManager
      */
     protected function getConfigName()
     {
-        return 'mautic';
+        return "mautic";
     }
 
     /**
@@ -71,21 +71,16 @@ class Mautic extends AbstractManager
      * @param null $body
      * @return mixed
      */
-    public function request($method = null, $endpoints = null, $body = null)
+    public function request( $method = null, $endpoints = null, $body = null )
     {
-        $consumer         = MauticConsumer::whereNotNull('id')->orderBy('created_at', 'desc')->first();
+        $consumer         = MauticConsumer::whereNotNull( "id" )->orderBy( "created_at", "desc" )->first();
 
-        $expirationStatus = $this->factory->checkExpirationTime($consumer->expires);
+        $expirationStatus = $this->factory->checkExpirationTime( $consumer->expires );
 
-        if ($expirationStatus == true)
-        {
-            $newToken = $this->factory->refreshToken($consumer->refresh_token);
-            return $this->factory->callMautic($method, $endpoints, $body, $newToken->access_token);
-        }
-        else
-        {
-            return $this->factory->callMautic($method, $endpoints, $body, $consumer->access_token);
-        }
+        if ( $expirationStatus == true )
+            $consumer = $this->factory->refreshToken( $consumer->refresh_token );
+
+        return $this->factory->callMautic( $method, $endpoints, $body, $consumer->access_token );
     }
 
 }

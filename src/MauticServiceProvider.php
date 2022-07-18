@@ -16,10 +16,10 @@ class MauticServiceProvider extends ServiceProvider
     public function boot()
     {
         // Publish Configuration File to base Path.
-        $this->publishes([
-            __DIR__ . '/config/mautic.php' => base_path('config/mautic.php'),
-            __DIR__ . '/migrations' => $this->app->databasePath() . '/migrations'
-        ]);
+        $this->publishes( [
+            __DIR__ . "/config/mautic.php" => base_path( "config/mautic.php" ),
+            __DIR__ . "/migrations"        => $this->app->databasePath() . "/migrations"
+        ] );
     }
 
     /**
@@ -29,9 +29,9 @@ class MauticServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerFactory($this->app);
-        $this->registerManager($this->app);
-        $this->registerRoutes($this->app);
+        $this->registerFactory( $this->app );
+        $this->registerManager( $this->app );
+        $this->registerRoutes(  $this->app );
     }
 
     /**
@@ -41,13 +41,13 @@ class MauticServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerFactory(Application $app)
+    protected function registerFactory( Application $app )
     {
-        $app->singleton('mautic.factory', function () {
+        $app->singleton( "mautic.factory", function () {
             return new Factories\MauticFactory();
-        });
+        } );
 
-        $app->alias('mautic.factory', 'Triibo\Mautic\Factories\MauticFactory');
+        $app->alias( "mautic.factory", "Triibo\Mautic\Factories\MauticFactory" );
     }
 
     /**
@@ -57,16 +57,16 @@ class MauticServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerManager(Application $app)
+    protected function registerManager( Application $app )
     {
-        $app->singleton('mautic', function ($app) {
-            $config  = $app['config'];
-            $factory = $app['mautic.factory'];
+        $app->singleton( "mautic", function ( $app ) {
+            $config  = $app[ "config" ];
+            $factory = $app[ "mautic.factory" ];
 
-            return new Mautic($config, $factory);
-        });
+            return new Mautic( $config, $factory );
+        } );
 
-        $app->alias('mautic', 'Triibo\Mautic\Mautic');
+        $app->alias( "mautic", "Triibo\Mautic\Mautic" );
     }
 
     /**
@@ -74,11 +74,15 @@ class MauticServiceProvider extends ServiceProvider
      *
      * @return routes
      */
-    protected function registerRoutes(Application $app)
+    protected function registerRoutes( Application $app )
     {
-        $app['router']->group(['namespace' => 'Triibo\Mautic\Http\Controllers', "prefix" => "mautic"], function () {
-            require __DIR__ . '/Http/routes.php';
-        });
+        $app[ "router" ]->group( [
+                "namespace" => "Triibo\Mautic\Http\Controllers",
+                "prefix"    => "mautic"
+            ], function () {
+                require __DIR__ . "/Http/routes.php";
+            }
+        );
     }
 
     /**
@@ -89,8 +93,8 @@ class MauticServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'mautic',
-            'mautic.factory',
+            "mautic",
+            "mautic.factory",
         ];
     }
 

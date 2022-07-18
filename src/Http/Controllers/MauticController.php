@@ -16,14 +16,14 @@ class MauticController extends Controller
     {
         $consumer = MauticConsumer::count();
 
-        if ($consumer == 0)
+        if ( $consumer == 0 )
         {
-            Mautic::connection('main');
-            echo '<h1>Mautic App Successfully Registered</h1>';
+            Mautic::connection( "main" );
+            echo "<h1>Mautic App Successfully Registered</h1>";
         }
         else
         {
-            echo '<h1>Mautic App Already Register</h1>';
+            echo "<h1>Mautic App Already Register</h1>";
         }
     }
 }

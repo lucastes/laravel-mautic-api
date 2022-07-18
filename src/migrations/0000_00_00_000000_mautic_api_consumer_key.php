@@ -13,12 +13,12 @@ class MauticApiConsumerKey extends Migration
      */
     public function up()
     {
-        Schema::create('mautic_consumer', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('access_token');
-            $table->integer('expires');
-            $table->string('token_type');
-            $table->string('refresh_token');
+        Schema::create( "mautic_consumer", function ( Blueprint $table ) {
+            $table->increments("id");
+            $table->string("access_token");
+            $table->integer("expires");
+            $table->string("token_type");
+            $table->string("refresh_token");
             $table->timestamps();
         });
     }
@@ -30,7 +30,7 @@ class MauticApiConsumerKey extends Migration
      */
     public function down()
     {
-        Schema::drop('mautic_consumer');
+        Schema::drop( "mautic_consumer" );
     }
 
 }

@@ -12,13 +12,18 @@ class MauticConsumer extends Model
      *
      * @var string
      */
-    protected $table    = 'mautic_consumer';
+    protected $table    = "mautic_consumer";
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['access_token', 'expires', 'token_type', 'refresh_token'];
+    protected $fillable = [
+        "access_token",
+        "expires",
+        "token_type",
+        "refresh_token"
+    ];
 
 }
