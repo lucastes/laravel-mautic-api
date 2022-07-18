@@ -4,8 +4,8 @@
     "license": "MIT",
     "keywords": ["mautic", "laravel", "laravel 8", "api", "sync", "automation", "email", "marketing"],
     "authors": [{
-        "name": "Prince Ali Khan",
-        "email": "princealikhan08@gmail.com"
+        "name": "Mateus Costa",
+        "email": "mateus@costamateus.com.br"
     }],
     "minimum-stability": "stable",
     "require": {
