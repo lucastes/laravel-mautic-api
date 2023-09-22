@@ -171,7 +171,7 @@ class MauticFactory
      *
      * @param $refreshToken
      *
-     * @return MauticConsumer
+     * @return MauticConsumer|array
      */
     public function refreshToken( $refreshToken )
     {
@@ -185,9 +185,9 @@ class MauticFactory
         {
             $response = $client->request( "POST", $mauticURL, array(
                 "form_params" => [
-                    "client_id"     => $config[ "clientKey" ],
+                    "client_id"     => $config[ "clientKey"    ],
                     "client_secret" => $config[ "clientSecret" ],
-                    "redirect_uri"  => $config[ "callback" ],
+                    "redirect_uri"  => $config[ "callback"     ],
                     "refresh_token" => $refreshToken,
                     "grant_type"    => "refresh_token"
                 ]
@@ -197,15 +197,18 @@ class MauticFactory
             $responseBodyAsString = json_decode( $responseBodyAsString, true );
 
             return MauticConsumer::create( [
-                "access_token"  => $responseBodyAsString[ "access_token" ],
+                "access_token"  => $responseBodyAsString[ "access_token"  ],
+                "token_type"    => $responseBodyAsString[ "token_type"    ],
+                "refresh_token" => $responseBodyAsString[ "refresh_token" ],
                 "expires"       => time() + $responseBodyAsString[ "expires_in" ],
-                "token_type"    => $responseBodyAsString[ "token_type" ],
-                "refresh_token" => $responseBodyAsString[ "refresh_token" ]
-            ] );
+                ] );
         }
         catch ( ClientException $e )
         {
-            return $exceptionResponse = $e->getResponse();
+            $response = $e->getResponse()->getBody();
+            $errors   = json_decode( $response, true );
+
+            return $errors;
         }
     }
 }
