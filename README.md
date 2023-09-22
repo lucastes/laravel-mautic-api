@@ -2,8 +2,14 @@
 Free and Open Source Marketing Automation API
 
 ## Requirements
+### v 2.0.7
 * Laravel ^8.0
 * PHP ^7.3 or newer
+* cURL support
+
+### v 3.0.0+
+* Laravel ^9.0
+* PHP ^8.0.2 or newer
 * cURL support
 
 ## Mautic Setup
