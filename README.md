@@ -1,4 +1,4 @@
-# Mautic API in Laravel 8.
+# Mautic API in Laravel 11.
 Free and Open Source Marketing Automation API
 
 ## Requirements
