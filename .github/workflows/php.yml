@@ -1,5 +1,3 @@
-name: PHP Composer
-
 on:
   push:
     branches: [ master ]
