@@ -8,22 +8,21 @@ use Triibo\Mautic\Models\MauticConsumer;
 
 class MauticController extends Controller
 {
-
     /**
      * Setup Applicaion.
+     *
+     * @return  void
      */
     public function initiateApplication()
     {
-        $consumer = MauticConsumer::count();
+        $message = "<h1>Mautic App Already Register</h1>";
 
-        if ( $consumer == 0 )
+        if ( MauticConsumer::count() == 0 )
         {
             Mautic::connection( "main" );
-            echo "<h1>Mautic App Successfully Registered</h1>";
+            $message = "<h1>Mautic App Successfully Registered</h1>";
         }
-        else
-        {
-            echo "<h1>Mautic App Already Register</h1>";
-        }
+
+        echo $message;
     }
 }

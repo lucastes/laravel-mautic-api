@@ -3,7 +3,7 @@
 namespace Triibo\Mautic\Exceptions;
 
 /**
- * Invalid Request Exception
+ * Invalid Request Exception.
  *
  * Thrown when a request is invalid or missing required fields.
  */

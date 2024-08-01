@@ -2,16 +2,15 @@
 
 namespace Triibo\Mautic;
 
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
 
 class MauticServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap the application services.
      *
-     * @return void
+     * @return  void
      */
     public function boot()
     {
@@ -25,7 +24,7 @@ class MauticServiceProvider extends ServiceProvider
     /**
      * Register the service provider.
      *
-     * @return void
+     * @return  void
      */
     public function register()
     {
@@ -37,9 +36,8 @@ class MauticServiceProvider extends ServiceProvider
     /**
      * Register the factory class.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
-     * @return void
+     * @param   Application     $app
+     * @return  void
      */
     protected function registerFactory( Application $app )
     {
@@ -53,9 +51,8 @@ class MauticServiceProvider extends ServiceProvider
     /**
      * Register the manager class.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
-     * @return void
+     * @param   Application     $app
+     * @return  void
      */
     protected function registerManager( Application $app )
     {
@@ -72,7 +69,8 @@ class MauticServiceProvider extends ServiceProvider
     /**
      * Get the routes services provided by the provider.
      *
-     * @return routes
+     * @param   Application     $app
+     * @return  void
      */
     protected function registerRoutes( Application $app )
     {
@@ -88,7 +86,7 @@ class MauticServiceProvider extends ServiceProvider
     /**
      * Get the services provided by the provider.
      *
-     * @return array
+     * @return  array
      */
     public function provides()
     {
@@ -97,5 +95,4 @@ class MauticServiceProvider extends ServiceProvider
             "mautic.factory",
         ];
     }
-
 }
